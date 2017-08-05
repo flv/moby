@@ -2,7 +2,7 @@ sudo: required
 
 language: bash
 script:
-  - make binary
+  - make deb
 
 services:
   - docker
