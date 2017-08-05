@@ -1,0 +1,12 @@
+sudo: required
+
+language: bash
+script:
+  - make binary
+
+services:
+  - docker
+
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y git-all build-essential 
