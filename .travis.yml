@@ -1,8 +1,5 @@
 sudo: required
 
-language: bash
-script:
-  - make deb
 
 services:
   - docker
@@ -10,3 +7,21 @@ services:
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y git-all build-essential 
+
+
+jobs:
+  include:
+    - stage: make build
+      language: bash
+      script: make build
+    - stage: make deb
+      language: bash
+      script: make deb
+    - stage: deploy release
+      deploy:
+        provider: releases
+        file_glob: true
+        api_key: $GITHUB_OAUTH_TOKEN
+        file: bundles/*
+        skip_cleanup: true
+        draft: true
