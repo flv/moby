@@ -2,14 +2,13 @@ sudo: required
 
 language: bash
 script:
-  - make deb
+  - echo "check go"
+  - go version
+  - ./hack/make.sh binary
   - echo "ALL check"
   - ls *
   - echo "bundles check"
   - ls bundles/
-
-services:
-  - docker
 
 before_install:
   - sudo apt-get -qq update
