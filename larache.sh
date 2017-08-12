@@ -103,3 +103,6 @@ apt-get install libnet-dev -y && \
         && cd /usr/src/criu \
         && make \
         && make install-criu
+
+# mmh
+./hack/make.sh binary
