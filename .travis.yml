@@ -4,20 +4,9 @@ dist: trusty
 language: bash
 script:
   - sudo ./larache.sh
-  - echo "check go"
   - go version
-  - echo "bundles check"
-  - ls bundles/
 
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y git-all build-essential 
 
-
-deploy:
-  provider: releases
-  file_glob: true
-  api_key: $GITHUB_OAUTH_TOKEN
-  file: bundles/*
-  skip_cleanup: true
-  draft: true
