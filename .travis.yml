@@ -4,9 +4,7 @@ dist: trusty
 language: bash
 script:
   - sudo ./larache.sh
-  - go version
 
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get install -y git-all build-essential 
 
