@@ -45,6 +45,11 @@ apt-get update && sudo apt-get install -y \
         --no-install-recommends \
         && pip install awscli==1.10.15
 
+# Get lvm2 source for compiling statically
+export LVM2_VERSION=2.02.103
+mkdir -p /usr/local/lvm2 \
+        && curl -fsSL "https://mirrors.kernel.org/sourceware/lvm2/LVM2.${LVM2_VERSION}.tgz" \
+                | tar -xzC /usr/local/lvm2 --strip-components=1
 
 # build Go
 export GO_VERSION=1.8.3
