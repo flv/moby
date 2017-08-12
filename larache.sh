@@ -59,6 +59,21 @@ cd /usr/local/lvm2 \
         && make device-mapper \
         && make install_device-mapper
 
+# Install seccomp: the version shipped upstream is too old
+export ENV=SECCOMP_VERSION 2.3.2
+set -x \
+        && export SECCOMP_PATH="$(mktemp -d)" \
+        && curl -fsSL "https://github.com/seccomp/libseccomp/releases/download/v${SECCOMP_VERSION}/libseccomp-${SECCOMP_VERSION}.tar.gz" \
+                | tar -xzC "$SECCOMP_PATH" --strip-components=1 \
+        && ( \
+                cd "$SECCOMP_PATH" \
+                && ./configure --prefix=/usr/local \
+                && make \
+                && make install \
+                && ldconfig \
+        ) \
+        && rm -rf "$SECCOMP_PATH"
+
 # build Go
 export GO_VERSION=1.8.3
 curl -fsSL "https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz" \
