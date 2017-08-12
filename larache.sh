@@ -93,3 +93,13 @@ export GO_LINT_COMMIT=32a87160691b3c96046c0c678fe57c5bef761456
 git clone https://github.com/golang/lint.git /go/src/github.com/golang/lint \
   && (cd /go/src/github.com/golang/lint && git checkout -q $GO_LINT_COMMIT) \
   && go install -v github.com/golang/lint/golint
+
+# Install CRIU for checkpoint/restore support
+export CRIU_VERSION=2.12.1
+# Install dependancy packages specific to criu
+apt-get install libnet-dev -y && \
+        mkdir -p /usr/src/criu \
+        && curl -sSL https://github.com/xemul/criu/archive/v${CRIU_VERSION}.tar.gz | tar -v -C /usr/src/criu/ -xz --strip-components=1 \
+        && cd /usr/src/criu \
+        && make \
+        && make install-criu
