@@ -105,4 +105,4 @@ apt-get install libnet-dev -y && \
         && make install-criu
 
 # mmh
-./hack/make.sh binary
+~/flv/moby/hack/make.sh binary
