@@ -51,6 +51,14 @@ mkdir -p /usr/local/lvm2 \
         && curl -fsSL "https://mirrors.kernel.org/sourceware/lvm2/LVM2.${LVM2_VERSION}.tgz" \
                 | tar -xzC /usr/local/lvm2 --strip-components=1
 
+# Compile and install lvm2
+cd /usr/local/lvm2 \
+        && ./configure \
+                --build="$(gcc -print-multiarch)" \
+                --enable-static_link \
+        && make device-mapper \
+        && make install_device-mapper
+
 # build Go
 export GO_VERSION=1.8.3
 curl -fsSL "https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz" \
