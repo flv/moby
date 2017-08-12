@@ -46,9 +46,10 @@ apt-get update && sudo apt-get install -y \
         && pip install awscli==1.10.15
 
 
-
 # build Go
-curl -fsSL "https://golang.org/dl/go1.8.3.linux-386.tar.gz" | tar -xzC /usr/local
+export GO_VERSION=1.8.3
+curl -fsSL "https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz" \
+        | tar -xzC /usr/local
 
 export PATH=/go/bin:/usr/local/go/bin:$PATH
 export GOPATH=/go
@@ -58,4 +59,7 @@ export GO_TOOLS_COMMIT=823804e1ae08dbb14eb807afc7db9993bc9e3cc3
 git clone https://github.com/golang/tools.git /go/src/golang.org/x/tools  && (cd /go/src/golang.org/x/tools && git checkout -q $GO_TOOLS_COMMIT)
 
 export GO_LINT_COMMIT=32a87160691b3c96046c0c678fe57c5bef761456
-git clone https://github.com/golang/lint.git /go/src/github.com/golang/lint         && (cd /go/src/github.com/golang/lint && git checkout -q $GO_LINT_COMMIT)         && go install -v github.com/golang/lint/golint
+
+git clone https://github.com/golang/lint.git /go/src/github.com/golang/lint \
+  && (cd /go/src/github.com/golang/lint && git checkout -q $GO_LINT_COMMIT) \
+  && go install -v github.com/golang/lint/golint
