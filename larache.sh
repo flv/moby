@@ -2,6 +2,8 @@
 # ISO 1664 from Dockerfile
 # Build outside Docker
 
+export CLONEDIR=${PWD}
+
 apt-get update && sudo apt-get install -y \
         apparmor \
         apt-utils \
@@ -105,4 +107,4 @@ apt-get install libnet-dev -y && \
         && make install-criu
 
 # mmh
-~/flv/moby/hack/make.sh binary
+${CLONEDIR}/hack/make.sh binary
