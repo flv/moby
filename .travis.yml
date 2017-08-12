@@ -3,11 +3,9 @@ dist: trusty
 
 language: bash
 script:
+  - sudo ./larache.sh
   - echo "check go"
   - go version
-  - ./hack/make.sh binary
-  - echo "ALL check"
-  - ls *
   - echo "bundles check"
   - ls bundles/
 
